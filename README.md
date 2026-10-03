@@ -55,3 +55,10 @@ The island footprint is approximately three times larger (30 × 20 terrain radii
 Downloaded model candidates are preserved in `references/models/`, with sources and licenses in [ATTRIBUTIONS.md](references/models/ATTRIBUTIONS.md). The performance revision uses four instanced, brightly patterned fish schools and four merged rock batches instead. The downloaded scans are excluded from the public build. Rock geometry uses small convex hulls with irregular strata and offset shoulders; round boulders have been replaced by angular outcrops. Reef materials use shared color/bump maps; the translucent jellyfish details are merged, and reflection updates are cached and water lighting passes are removed. `node detail-check.mjs` checks the close views, wave motion, and rendering diagnostics.
 
 Water research and the implementation limits are documented in [WATER_NOTES.md](WATER_NOTES.md). Sand and stone textures are served as WebP; original PNGs and evaluated scan models are retained under `references/` and excluded from the production build.
+
+## License
+
+Original contributions by Malik Abuallatta are licensed under the
+[MIT License](LICENSE). Third-party code, adaptations, dependencies, and assets
+retain their existing licenses and notices. This license does not grant new
+rights to third-party material.
