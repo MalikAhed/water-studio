@@ -4,8 +4,13 @@
 
 An interactive Three.js / WebGL island: clear turquoise water, a sloping sandy beach, 18 coconut palms with 108 coconuts, 70 varied rocks, 30 animated reef fish, seagrass/kelp clusters, colorful coral and sponge gardens, leafy coastal plants, an arched wooden bridge, and a wooden rowboat. Four turtles, nine crabs, seven seahorses, five jellyfish, and scattered starfish inhabit the reef. The water renders scene reflections, depth-aware refraction, wavelength-dependent absorption, and a subtle shoreline wash. The earlier flowing wave motion and fading ripple rings drive the newer water renderer; water caustics and sun glare are disabled.
 
+## Run locally
+
+Use Node.js 24 (the deployment version) or a compatible Node.js 22 release
+starting at 22.12. Install the exact dependencies from the committed lockfile:
+
 ```sh
-npm install
+npm ci
 npm run dev -- --port 4174 --strictPort
 ```
 
@@ -29,7 +34,24 @@ For a local production preview, run `npm run build` followed by `npm run preview
 
 ## Verification
 
-`npm run build` builds the production site. `node wave-check.mjs` checks continuous wave motion, controls, pause, world-space anchoring, ripple speed and decay, reset and frame-cadence consistency. `node habitat-check.mjs` exercises swept collision and two minutes of fish/animal movement against obstructed swimming lanes. With the server running, `node smoke.mjs` checks WebGL shaders, movement while paused, diving and resurfacing, animal collision diagnostics, mouse interactions, reset, lighting controls, PNG export, and desktop/mobile rendering. Set `CHROME_PATH` for a Chrome executable outside `/usr/bin/google-chrome`, or `WATER_URL` for a different server address. The test advances animation frames explicitly because the headless environment uses software rendering. Captures are saved in `artifacts/`.
+`npm run build` builds the production site; the Pages workflow runs this build,
+not the browser regression checks below.
+
+- `node habitat-check.mjs` runs directly after `npm ci`, without a development
+  server or Chrome. It checks swept collision and simulated animal movement.
+- `node wave-check.mjs` checks wave motion, pause, controls, anchoring, ripple decay,
+  reset, and frame cadence. It accepts `CHROME_PATH`, but needs the development
+  server at `http://localhost:4174/` because it imports development modules.
+- `node smoke.mjs` checks WebGL, navigation, pause, reset, lighting, PNG export,
+  and desktop/mobile rendering. It accepts `CHROME_PATH` and `WATER_URL`.
+- `node detail-check.mjs` captures close views and checks wave motion. It hardcodes
+  `http://localhost:4174/` and `/usr/bin/google-chrome`; neither override applies.
+
+Browser scripts require an installed Chrome executable and a running server.
+Their default browser path is `/usr/bin/google-chrome`. Captures are written to
+`artifacts/`; explicit animation stepping makes these functional checks rather
+than hardware FPS measurements. See [TESTING.md](TESTING.md) for the complete
+setup, browser selection, and production-path smoke check.
 
 ## Textures
 
