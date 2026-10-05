@@ -1,15 +1,20 @@
 {
   "name": "water-studio",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Interactive Three.js Hawaiian lagoon and underwater exploration experience.",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "three.js",
+    "webgl",
+    "interactive-art",
+    "water"
+  ],
+  "author": "Malik Abuallatta",
   "license": "MIT",
   "type": "module",
   "dependencies": {
